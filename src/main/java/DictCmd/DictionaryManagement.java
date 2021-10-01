@@ -25,7 +25,7 @@ public class DictionaryManagement {
             boolean check = false;
             for (Word value : Dictionary.Words) {
                 if (value.getWord_target().equals(target.toLowerCase())) {
-                    System.out.println("Da co tu nay trong tu dien. Moi nhap lai:");
+                    System.out.println("Da co tu nay trong tu dien.");
                     check = true;
                     i--;
                     break;
@@ -58,7 +58,7 @@ public class DictionaryManagement {
         if(Dictionary.Words.size() == 0) {
             return -1;
         }
-        int right = Dictionary.Words.size()-1;
+        int right = Dictionary.Words.size() - 1;
         int left = 0;
         while (right >= left) {
             int mid = left + (right - left) / 2;
@@ -172,22 +172,6 @@ public class DictionaryManagement {
             } else if (c == 'N') {
                 return;
             }
-        }
-    }
-
-    public static void searchWord() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap tu muon tim kiem:");
-        String target = sc.nextLine();
-        int num = 0;
-        for (Word word : Dictionary.Words) {
-            if (word.getWord_target().startsWith(target)) {
-                System.out.println(word.getWord_target());
-                num++;
-            }
-        }
-        if (num == 0) {
-            System.out.println("Khong co tu nao bat dau bang \""+ target + "\"");
         }
     }
 

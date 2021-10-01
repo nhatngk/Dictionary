@@ -45,7 +45,7 @@ public class DictionaryCommandLine {
                     break;
             }
 
-        } while (option >= 0 && option <=2 );
+        } while (option >= 0 && option <=2);
     }
 
     public static void dictionaryAdvanced() throws IOException {
@@ -94,7 +94,7 @@ public class DictionaryCommandLine {
                     DictionaryManagement.removeWord();
                     break;
                 case 7:
-                    DictionaryManagement.searchWord();
+                    dictionarySearch();
                     break;
                 case 8:
                     DictionaryManagement.dictionaryExportToFile();
@@ -102,6 +102,22 @@ public class DictionaryCommandLine {
             }
 
         } while (option >= 0 && option <= 8);
+    }
+
+    public static void dictionarySearch() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap tu muon tim kiem:");
+        String target = sc.nextLine();
+        int num = 0;
+        for (Word word : Dictionary.Words) {
+            if (word.getWord_target().startsWith(target)) {
+                System.out.println(word.getWord_target());
+                num++;
+            }
+        }
+        if (num == 0) {
+            System.out.println("Khong co tu nao bat dau bang \""+ target + "\"");
+        }
     }
 
     public static void main(String[] args) throws IOException {
