@@ -50,7 +50,6 @@ public class DictionaryManagement {
             String line = sc.nextLine();
             String[] values = line.split("\t");
             Word word = new Word(values[0],values[1]);
-            word.onFile = true;
             Dictionary.Words.add(word);
         }
         sc.close();

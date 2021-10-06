@@ -3,7 +3,6 @@ package DictCmd;
 public class Word implements Comparable<Word> {
     private String word_target;
     private String word_explain;
-    protected boolean onFile = false;
 
     public Word() {
 
