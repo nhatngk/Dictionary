@@ -3,5 +3,4 @@ module Dictionary {
     requires javafx.fxml;
     requires freetts;
 
-    opens GUI to javafx.fxml;
 }

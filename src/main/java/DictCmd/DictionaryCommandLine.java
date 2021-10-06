@@ -1,5 +1,6 @@
 package DictCmd;
 
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -49,43 +50,44 @@ public class DictionaryCommandLine {
     }
 
     public static void dictionaryAdvanced() throws IOException {
+        DictionaryManagement.insertFromFile();
         Scanner sc = new Scanner(System.in);
         int option = -1;
         do {
-            System.out.println("Tu dien Anh - Viet");
-            System.out.println("Nhap 1 ghi du lieu vao tu dien.");
-            System.out.println("Nhap 2 de xem tat ca tu trong tu dien.");
-            System.out.println("Nhap 3 de tim kiem tu hoan chinh trong tu dien.");
-            System.out.println("Nhap 4 de them tu vao tu dien.");
-            System.out.println("Nhap 5 de thay doi tu trong tu dien.");
-            System.out.println("Nhap 6 de xoa tu trong tu dien.");
-            System.out.println("Nhap 7 de tim kiem tu trong tu dien.");
-            System.out.println("Nhap 8 de luu du lieu vao file.");
-            System.out.println("Nhap 0 de thoat.");
-            System.out.print("Moi nhap lua chon: ");
+            System.out.println("Từ điển Anh - Việt");
+            System.out.println("Nhập 1 Để xem tất cả các từ trong từ điển.");
+            System.out.println("Nhập 2 Để tìm kiếm từ hoàn chỉnh trong từ điển.");
+            System.out.println("Nhập 3 Để thêm từ vào từ điển.");
+            System.out.println("Nhập 4 Để thêm nhiều từ vào từ điển.");
+            System.out.println("Nhập 5 Để thay đổi từ trong từ điển.");
+            System.out.println("Nhập 6 Để xóa từ trong từ điển.");
+            System.out.println("Nhập 7 để tìm kiếm từ trong từ điển.");
+            System.out.println("Nhập 0 để thoát.");
+            System.out.print("Mời nhập lựa chọn: ");
             do {
                 try {
                     option = Integer.parseInt(sc.nextLine());
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }
-            } while (option < 0 || option > 8);
+            } while (option < 0 || option > 7);
             switch (option) {
                 case 0:
+                    DictionaryManagement.dictionaryExportToFile();
                     return;
                 case 1:
-                    DictionaryManagement.insertFromFile();
-                    break;
-                case 2:
                     showAllWords();
                     break;
-                case 3:
+                case 2:
                     System.out.println("Nhap tu can tim:");
                     String word = sc.nextLine();
                     System.out.println(DictionaryManagement.dictionaryLookup(word));
                     break;
-                case 4:
+                case 3:
                     DictionaryManagement.insertAWordCmd();
+                    break;
+                case 4:
+                    DictionaryManagement.insertFromCommandline();
                     break;
                 case 5:
                     DictionaryManagement.changeWord();
@@ -96,17 +98,14 @@ public class DictionaryCommandLine {
                 case 7:
                     dictionarySearch();
                     break;
-                case 8:
-                    DictionaryManagement.dictionaryExportToFile();
-                    break;
             }
 
-        } while (option >= 0 && option <= 8);
+        } while (option >= 0 && option <= 7);
     }
 
     public static void dictionarySearch() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap tu muon tim kiem:");
+        System.out.print("Nhập từ muốn tìm kiếm:");
         String target = sc.nextLine();
         int num = 0;
         for (Word word : Dictionary.Words) {
@@ -116,7 +115,7 @@ public class DictionaryCommandLine {
             }
         }
         if (num == 0) {
-            System.out.println("Khong co tu nao bat dau bang \""+ target + "\"");
+            System.out.println("Không có từ bắt đầu bằng \""+ target + "\"");
         }
     }
 

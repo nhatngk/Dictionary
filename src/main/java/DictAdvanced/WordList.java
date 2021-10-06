@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WordList {
-    public static ArrayList<WordAdvanced> Words = new ArrayList<>();
+    public static ArrayList<WordAdvanced> Words = new ArrayList<WordAdvanced>();
 
-    public static void insertFromFile() throws FileNotFoundException {
-        File dictionary = new File("dictionaries.txt");
+    public static void insertFromFileEx() throws FileNotFoundException {
+        File dictionary = new File("dictionariesExtra.txt");
         Scanner sc = new Scanner(dictionary,"utf-8");
         while (sc.hasNextLine()) {
             String currentLine = sc.nextLine();
@@ -60,7 +60,7 @@ public class WordList {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        insertFromFile();
+        insertFromFileEx();
         for (WordAdvanced wordAdvanced : WordList.Words) {
             System.out.println(wordAdvanced.getWord());
             System.out.println(wordAdvanced.getPronunce());

@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 
 public class DictionaryManagement {
     public static void insertFromCommandline() {
-        System.out.println("Nhap so tu muon nhap:");
+        System.out.println("Nhập số từ muốn nhập:");
         Scanner sc = new Scanner(System.in);
         int num = 0;
         try {
@@ -20,22 +20,25 @@ public class DictionaryManagement {
             e.printStackTrace();
         }
         for (int i = 0; i < num; i++) {
-            System.out.print("Nhap tu tieng Anh:");
+            System.out.print("Nhập từ tiếng Anh:");
             String target = sc.nextLine();
             boolean check = false;
             for (Word value : Dictionary.Words) {
                 if (value.getWord_target().equals(target.toLowerCase())) {
-                    System.out.println("Da co tu nay trong tu dien.");
-                    check = true;
-                    i--;
+                    System.out.println("Đã có từ này trong từ điển. Nhập lại? (Y/N)");
+                    String reput = sc.nextLine();
+                    if (reput.equals("Y")) {
+                        check = true;
+                        i--;
+                    }
                     break;
                 }
             }
             if (! check) {
-                System.out.print("Nhap nghia tieng Viet:");
+                System.out.print("Nhập nghĩa tiếng Việt:");
                 String explain = sc.nextLine();
                 Dictionary.Words.add(new Word(target.toLowerCase(),explain));
-                System.out.println("Da them tu " + target.toLowerCase() + " vao tu dien.");
+                System.out.println("Đã thêm từ " + target.toLowerCase() + " vào từ điển.");
             }
         }
     }
@@ -47,11 +50,11 @@ public class DictionaryManagement {
             String line = sc.nextLine();
             String[] values = line.split("\t");
             Word word = new Word(values[0],values[1]);
+            word.onFile = true;
             Dictionary.Words.add(word);
         }
         sc.close();
         Collections.sort(Dictionary.Words);
-        System.out.println("Da nhap du lieu thanh cong");
     }
 
     public static int binarySearch(String word) {
@@ -78,7 +81,7 @@ public class DictionaryManagement {
     public static String dictionaryLookup(String wordLookUp) {
         int index = binarySearch(wordLookUp);
         if (index < 0 ){
-            return "Khong tim thay tu "  + wordLookUp + " trong tu dien";
+            return "Không tìm thấy từ "  + wordLookUp + " trong từ điển";
         } else {
             return Dictionary.Words.get(index).getWord_explain();
         }
@@ -86,7 +89,7 @@ public class DictionaryManagement {
 
     public static void insertAWordCmd() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap tu tieng Anh:");
+        System.out.print("Nhập từ tiếng Anh:");
         String target = sc.nextLine();
         boolean check = false;
         do {
@@ -94,26 +97,30 @@ public class DictionaryManagement {
             int index = binarySearch(target);
             if (index >= 0 ) {
                 check = true;
-                System.out.println("Da co tu nay trong tu dien. Moi nhap lai:");
+                System.out.println("Đã có từ này trong từ điển. Mời nhập lại? (Y/N)");
+                String reput = sc.nextLine();
+                if (reput.equals("N")) {
+                    return;
+                }
                 target = sc.nextLine();
             } else {
                 break;
             }
         } while (check);
-        System.out.print("Nhap nghia tieng Viet:");
+        System.out.print("Nhập nghĩa tiếng Việt:");
         String explain = sc.nextLine();
         Dictionary.Words.add(new Word(target.toLowerCase(),explain));
         Collections.sort(Dictionary.Words);
-        System.out.println("Da them tu " + target.toLowerCase() + " vao tu dien.");
+        System.out.println("Đã thêm từ " + target.toLowerCase() + " vào từ điển.");
     }
 
     public static void changeWord() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap tu muon sua:");
+        System.out.print("Nhập từ muốn sửa:");
         String target = sc.nextLine();
         int index = binarySearch(target);
         if (index < 0) {
-            System.out.println("Chua co tu " + target + "trong tu dien.Ban co muon them vao tu dien? Y/N?");
+            System.out.println("Chưa có từ " + target + "trong từ điển.Bạn có muốn thêm vào từ điển không? Y/N?");
             char c = sc.nextLine().charAt(0);
             if (c == 'Y') {
                 insertAWordCmd();
@@ -122,10 +129,10 @@ public class DictionaryManagement {
             }
         } else {
             String oldWord = Dictionary.Words.get(index).getWord_target();
-            System.out.println("Ban co muon sua tu tieng Anh? Y/N?");
+            System.out.println("Bạn có muốn sửa từ tiếng Anh? Y/N?");
             char c = sc.nextLine().charAt(0);
             if (c == 'Y') {
-                System.out.println("Sua tu tieng Anh:");
+                System.out.println("Sửa từ tiếng Anh:");
                 String changedWord = sc.nextLine();
                 boolean check = false;
                 do {
@@ -133,42 +140,42 @@ public class DictionaryManagement {
                     int index1 = binarySearch(changedWord);
                     if (index1 >= 0) {
                         check = true;
-                        System.out.println("Da co tu nay trong tu dien. Moi nhap lai:");
+                        System.out.println("Đã có từ này trong tù điển. Mời nhập lại:");
                         changedWord = sc.nextLine();
                     } else {
                         break;
                     }
                 } while (check);
-                System.out.print("Nhap nghia tieng Viet:");
+                System.out.print("Nhập nghĩa tiếng việt:");
                 String explain = sc.nextLine();
                 Dictionary.Words.get(index).setWord_target(changedWord.toLowerCase());
                 Dictionary.Words.get(index).setWord_explain(explain);
                 Collections.sort(Dictionary.Words);
-                System.out.println("Da thay tu " + oldWord + " thanh tu " + changedWord.toLowerCase());
+                System.out.println("Đã thay từ " + oldWord + " thành từ " + changedWord.toLowerCase());
             } else if (c == 'N') {
-                System.out.print("Nhap nghia tieng Viet:");
+                System.out.print("Nhập nghĩa tiếng việt:");
                 String explain = sc.nextLine();
                 Dictionary.Words.get(index).setWord_explain(explain);
                 Collections.sort(Dictionary.Words);
-                System.out.println("Da thay doi nghia cua tu " + oldWord);
+                System.out.println("Đã thay đổi nghĩa của từ " + oldWord);
             }
         }
     }
 
     public static void removeWord() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap tu muon xoa:");
+        System.out.print("Nhập từ muốn xóa:");
         String target = sc.nextLine();
         int index = binarySearch(target);
         if (index < 0) {
-            System.out.println("Chua co tu " + target + "trong tu dien.");
+            System.out.println("Chưa có từ " + target + "trong từ điển.");
         } else {
-            System.out.println("Ban co chac muon xoa tu "+ target + "? Y/N?");
+            System.out.println("Bạn có chắc chắn muốn xóa từ "+ target + "? Y/N?");
             char c = sc.nextLine().charAt(0);
             if (c == 'Y') {
                 Dictionary.Words.remove(index);
                 Collections.sort(Dictionary.Words);
-                System.out.println("Da xoa tu " + target + " khoi tu dien.");
+                System.out.println("Đã xóa từ " + target + " khỏi từ điển.");
             } else if (c == 'N') {
                 return;
             }
@@ -181,7 +188,7 @@ public class DictionaryManagement {
             fileWriter.write(word.getWord_target() + "\t" + word.getWord_explain() + "\n");
         }
         fileWriter.close();
-        System.out.println("Da ghi du lieu vao file.");
+        System.out.println("Đã ghi dữ liệu vào file.");
     }
 }
 
