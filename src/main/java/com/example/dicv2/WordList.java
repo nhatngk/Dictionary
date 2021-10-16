@@ -3,11 +3,11 @@ package com.example.dicv2;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class WordList {
-    public static ArrayList<WordAdvanced> Words = new ArrayList<WordAdvanced>();
+    public static HashMap<Integer,WordAdvanced> Words = new HashMap<>();
 
     public static void insertFromFileEx() throws FileNotFoundException {
         File dictionary = new File("dictionaries.txt");
@@ -42,20 +42,32 @@ public class WordList {
                     }
                 } while (!nextLine.startsWith("@"));
                 newWord.addExplain(kind, pronunce, explain);
-                Words.add(newWord);
+                Integer index = word.hashCode();
+                Words.put(index,newWord);
             }
         }
         sc.close();
     }
 
+    public static Object search(String word) {
+        if (Words.containsKey(word.hashCode())) {
+            return Words.get(word.hashCode());
+        }
+        return "";
+    }
+
+    public static void add(WordAdvanced word) {
+        Words.put(word.getWord().hashCode(),word);
+    }
+
+    public static void delete(String word) {
+        Words.remove(word.hashCode());
+    }
+
+
+
     public static void main(String[] args) throws IOException {
         insertFromFileEx();
-        System.out.println(Words.size());
-        System.out.println(Words.get(0).explains.size());
-        System.out.println(Words.get(0).getWord());
-        System.out.println(Words.get(0).explains.get(0).getPronunce());
-        System.out.println(Words.get(0).explains.get(0).getKind());
-        System.out.println(Words.get(0).explains.get(0).getExplain());
 
     }
 }

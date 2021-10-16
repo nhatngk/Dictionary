@@ -12,9 +12,15 @@ public class DictionaryController {
     private TextField myTextInPut;
     private ListView listView;
 
+    String word;
     public void Search(ActionEvent event) {
+        word = myTextInPut.getText();
+        WordAdvanced wordSearch = (WordAdvanced) WordList.search(word);
 
     }
+
+
+
 
     public void Add(ActionEvent event) {
 
