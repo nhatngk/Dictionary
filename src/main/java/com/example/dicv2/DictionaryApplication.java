@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class DictionaryApplication extends Application {
     public void runApplication(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load((DictionaryApplication.class.getResource("hello-view.fxml")));
+        Parent root = FXMLLoader.load(DictionaryApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(root);
 
         stage.setTitle("Dictionary");

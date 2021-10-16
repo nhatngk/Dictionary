@@ -3,22 +3,26 @@ package com.example.dicv2;
 public class Explain {
     private String kind;
     private String explain;
-    private String pronunce;
+    private String example;
 
     public Explain() {}
 
-    public Explain(String kind, String pronunce, String explain) {
+    public Explain(String kind, String explain, String example) {
         this.kind = kind;
-        this.pronunce = pronunce;
         this.explain = explain;
+        this.example = example;
+    }
+
+    public String getExample() {
+        return example;
+    }
+
+    public void setExample(String example) {
+        this.example = example;
     }
 
     public void setWord(String kind) {
         this.kind = kind;
-    }
-
-    public void setPronunce(String pronunciation) {
-        this.pronunce = pronunciation;
     }
 
     public void setExplain(String explain) {
@@ -27,10 +31,6 @@ public class Explain {
 
     public String getKind() {
         return kind;
-    }
-
-    public String getPronunce() {
-        return pronunce;
     }
 
     public String getExplain() {
