@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class DictionaryController {
     @FXML
@@ -76,11 +77,11 @@ public class DictionaryController {
     public void InputText(ActionEvent event) {
         wordShow.removeAll(wordShow);
         String word = myTextInPut.getText();
-        for (WordAdvanced element : a.Words) {
-            if (element.getWord().startsWith(word)) {
-                wordShow.add(element);
+        for (Map.Entry<Integer, WordAdvanced> entry : a.Words.entrySet())
+            if (entry.getValue().getWord().startsWith(word)) {
+                wordShow.add(entry.getValue());
             }
-        }
+
         listView.setItems(wordShow);
         listView.setCellFactory(param -> new ListCell<WordAdvanced>() {
             @Override

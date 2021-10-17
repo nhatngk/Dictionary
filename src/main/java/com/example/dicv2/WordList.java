@@ -3,17 +3,42 @@ package com.example.dicv2;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.io.FileWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class WordList {
-    public static ArrayList<WordAdvanced> Words = new ArrayList<WordAdvanced>();
+    public static HashMap<Integer ,WordAdvanced> Words = new HashMap<>();
 
     public WordList() throws IOException {
         insertFromFile();
-        sortDic();
+    }
+
+    public static void exportToFile() throws IOException {
+        try {
+            FileWriter fileWriter = new FileWriter("dictionaries.txt");
+            for (Map.Entry<Integer, WordAdvanced> entry : Words.entrySet()) {
+                WordAdvanced wordAdvanced = entry.getValue();
+                String text = "@" +wordAdvanced.getWord();
+                text += " " + wordAdvanced.getPronunce() +"\n";
+                for (Explain explain : wordAdvanced.explains) {
+                    if (! explain.getKind().equals("")) {
+                        text = text + "*" + explain.getKind() + "\n";
+                    }
+                    if (! explain.getExplain().equals("")) {
+                        text = text + "-" + explain.getExplain() + "\n";
+                    }
+                    if (! explain.getExample().equals("")) {
+                        text = text + "=" + explain.getExample().replace(":", "+") + "\n";
+                    }
+                }
+                fileWriter.write(text);
+                fileWriter.close();
+                }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void insertFromFile() throws FileNotFoundException {
@@ -72,18 +97,33 @@ public class WordList {
                         break;
                     }
                 } while (!tempLine.startsWith("@"));
-                Words.add(newWord);
+                Integer hashCode = word.hashCode();
+                Words.put(hashCode,newWord);
             }
         }
         sc.close();
     }
 
-    public static void sortDic() {
-        Collections.sort(WordList.Words, new Comparator<WordAdvanced>() {
-            @Override
-            public int compare(WordAdvanced o1, WordAdvanced o2) {
-                return o1.getWord().compareTo(o2.getWord());
-            }
-        });
+   public static void delete(String word) {
+        if (Words.containsKey(word.hashCode())) {
+            Words.remove(word.hashCode());
+        }
+   }
+
+   public static void add(WordAdvanced wordAdvanced) {
+       Words.put(wordAdvanced.getWord().hashCode(), wordAdvanced);
+   }
+
+   public static void change(WordAdvanced wordAdvanced) {
+        Words.replace(wordAdvanced.getWord().hashCode(),wordAdvanced);
+   }
+
+
+    public static void main(String[] args) throws IOException {
+        Explain explain = new Explain("danh từ", " sách vỡ lòng, sách học vần", "");
+        WordAdvanced wordAdvanced = new WordAdvanced("a b c - book ", "/'eibi:'si:buk/");
+        wordAdvanced.explains.add(explain);
+        add(wordAdvanced);
+        exportToFile();
     }
 }
