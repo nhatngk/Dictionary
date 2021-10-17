@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="300.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.AddControl">
+   <children>
+      <TextField fx:id="word" layoutX="51.0" layoutY="31.0" promptText="Word (Require)" />
+      <TextField fx:id="explain" layoutX="51.0" layoutY="71.0" promptText="Meaning (Require)" />
+      <TextField fx:id="kind" layoutX="51.0" layoutY="108.0" promptText="Kind" />
+      <TextField fx:id="pronounce" layoutX="51.0" layoutY="150.0" promptText="Pronounce" />
+      <Button layoutX="96.0" layoutY="251.0" mnemonicParsing="false" onAction="#Confirm" text="Confirm" />
+      <TextArea fx:id="example" layoutX="33.0" layoutY="190.0" prefHeight="54.0" prefWidth="185.0" promptText="Example" />
+   </children>
+</AnchorPane>

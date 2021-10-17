@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.FixControl">
+   <children>
+      <TextField fx:id="word" layoutX="22.0" layoutY="70.0" promptText="Word" />
+      <TextField fx:id="pronounce" layoutX="22.0" layoutY="121.0" promptText="Pronounce" />
+      <TextField fx:id="kind" layoutX="22.0" layoutY="171.0" promptText="Kind" />
+      <Button layoutX="108.0" layoutY="235.0" mnemonicParsing="false" onAction="#ConfirmFix" text="Confirm" />
+      <ScrollPane hbarPolicy="NEVER" layoutX="186.0" layoutY="15.0" prefHeight="261.0" prefWidth="200.0">
+         <content>
+            <TextArea fx:id="fix" prefHeight="260.0" prefWidth="200.0" />
+         </content></ScrollPane>
+      <Button layoutX="22.0" layoutY="26.0" mnemonicParsing="false" onAction="#Start" text="Start" />
+   </children>
+</AnchorPane>

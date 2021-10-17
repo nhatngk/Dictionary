@@ -3,7 +3,10 @@ module com.example.dicv2 {
     requires javafx.fxml;
     requires freetts;
 
-
-    opens com.example.dicv2 to javafx.fxml;
     exports com.example.dicv2;
+    opens com.example.dicv2 to javafx.fml, javafx.fxml;
+    exports Control;
+    opens Control to javafx.fml, javafx.fxml;
+    exports Object;
+    opens Object to javafx.fml, javafx.fxml;
 }

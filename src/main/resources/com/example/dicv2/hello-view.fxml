@@ -33,7 +33,8 @@
                   <Pane prefHeight="48.0" prefWidth="240.0">
                      <children>
                         <Button layoutX="117.0" layoutY="9.0" mnemonicParsing="false" onAction="#AddButton" text="Add" />
-                        <Button fx:id="delete" layoutX="170.0" layoutY="9.0" lineSpacing="1.0" mnemonicParsing="false" onAction="#DeleteButton" text="Delete" />
+                        <Button layoutX="170.0" layoutY="9.0" lineSpacing="1.0" mnemonicParsing="false" onAction="#DeleteButton" text="Delete" />
+                        <Button layoutX="63.0" layoutY="9.0" mnemonicParsing="false" onAction="#FixButton" text="Fix" />
                      </children>
                   </Pane>
                </children></VBox>
@@ -56,9 +57,9 @@
       <Pane layoutX="240.0" prefHeight="60.0" prefWidth="360.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#326494" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="360.0" />
-            <Button fx:id="useAPI" layoutX="230.0" layoutY="13.0" mnemonicParsing="false" onAction="#UseAPI" text="Use API" />
-            <Button fx:id="spell" layoutX="291.0" layoutY="13.0" mnemonicParsing="false" onAction="#SpellButton" text="Spell" />
-            <Button fx:id="search" layoutX="176.0" layoutY="13.0" mnemonicParsing="false" onAction="#Choose" text="Search" />
+            <Button layoutX="230.0" layoutY="13.0" mnemonicParsing="false" onAction="#UseAPI" text="Use API" />
+            <Button layoutX="291.0" layoutY="13.0" mnemonicParsing="false" onAction="#SpellButton" text="Spell" />
+            <Button layoutX="176.0" layoutY="13.0" mnemonicParsing="false" onAction="#SearchButton" text="Search" />
          </children>
       </Pane>
       <StackPane layoutX="240.0" layoutY="60.0" prefHeight="440.0" prefWidth="360.0">
