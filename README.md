@@ -14,3 +14,5 @@
   - Phát âm sử dụng thư viện freetts
   - Sử dụng API Google translate
   - Giao diện đẹp mắt (chắc v :v )
+## Cài đặt
+- Cài đặt IDE chạy code kết hợp cùng javafx để chạy được project.
