@@ -5,6 +5,8 @@ import Object.WordAdvanced;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 
 public class FixControl {
@@ -17,6 +19,11 @@ public class FixControl {
     @FXML
     TextArea fix;
     public static WordAdvanced wordFix;
+
+    @FXML
+    AnchorPane scenePane;
+
+    Stage stage;
 
     public void Start() {
         StringBuilder temp = new StringBuilder();
@@ -40,5 +47,7 @@ public class FixControl {
         for (int i = 0; i < split.length; i++) {
             wordFix.explains.add(new Explain("", split[i], ""));
         }
+        stage = (Stage) scenePane.getScene().getWindow();
+        stage.close();
     }
 }

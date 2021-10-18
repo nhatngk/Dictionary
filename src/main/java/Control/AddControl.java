@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class AddControl {
     @FXML
@@ -17,6 +19,10 @@ public class AddControl {
     TextField pronounce;
     @FXML
     TextArea example;
+    @FXML
+    AnchorPane scenePane;
+
+    Stage stage;
     public static WordAdvanced wordAdd;
 
     public String getValue(TextField x) {
@@ -36,5 +42,7 @@ public class AddControl {
             wordAdd = new WordAdvanced(wordS, pronounceS);
             wordAdd.addExplain(kindS, explainS, exampleS);
         }
+        stage = (Stage) scenePane.getScene().getWindow();
+        stage.close();
     }
 }
